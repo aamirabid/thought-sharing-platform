@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "bb2797e7-3eee-4bb0-bdd5-a62612fffbc6",
+		"name": "THOUGHT-SHARING-APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTHENTICATION",
+			"item": [
+				{
+					"name": "SIGN-UP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "full_name",
+									"value": "Mohammad Aamir",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "mohammadaamir068@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "(qwerty123)",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SIGN-IN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/sign-in?email=mohammadaamir068@gmail.com&password=(qwerty123)",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sign-in"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "mohammadaamir068@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "(qwerty123)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SIGN-OUT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/sign-out",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"sign-out"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NOTES-MANAGEMENT",
+			"item": [
+				{
+					"name": "MY-NOTES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/notes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE-NOTE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "my note xyz",
+									"description": "String",
+									"type": "default"
+								},
+								{
+									"key": "body",
+									"value": "my note xyz",
+									"type": "default"
+								},
+								{
+									"key": "is_published",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/notes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE-NOTE",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "my note xyz",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "my note xyz",
+									"type": "text"
+								},
+								{
+									"key": "is_published",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/notes/my-note-xyz",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"notes",
+								"my-note-xyz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE-NOTE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/notes/my-note-xyz",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"notes",
+								"my-note-xyz"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DASHBOARD",
+			"item": [
+				{
+					"name": "GET-NOTES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/dashboard/notes/?filterBy=thought",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"dashboard",
+								"notes",
+								""
+							],
+							"query": [
+								{
+									"key": "filterBy",
+									"value": "thought"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-FILTER-TAGS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/dashboard/tags",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"dashboard",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "default"
+		}
+	]
+}
