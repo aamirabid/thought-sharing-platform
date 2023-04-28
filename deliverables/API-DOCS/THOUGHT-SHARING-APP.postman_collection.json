@@ -30,6 +30,11 @@
 									"key": "password",
 									"value": "(qwerty123)",
 									"type": "default"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "(qwerty123)",
+									"type": "default"
 								}
 							]
 						},
@@ -50,23 +55,28 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "mohammadaamir068@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "(qwerty123)",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{url}}/sign-in?email=mohammadaamir068@gmail.com&password=(qwerty123)",
+							"raw": "{{url}}/sign-in",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"sign-in"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "mohammadaamir068@gmail.com"
-								},
-								{
-									"key": "password",
-									"value": "(qwerty123)"
-								}
 							]
 						}
 					},
@@ -101,13 +111,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/auth/notes",
+							"raw": "{{url}}/auth/notes/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"auth",
-								"notes"
+								"notes",
+								""
 							]
 						}
 					},
@@ -124,18 +135,17 @@
 								{
 									"key": "title",
 									"value": "my note xyz",
-									"description": "String",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "body",
 									"value": "my note xyz",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "is_published",
 									"value": "1",
-									"type": "default"
+									"type": "text"
 								}
 							]
 						},
@@ -157,28 +167,8 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "my note xyz",
-									"type": "text"
-								},
-								{
-									"key": "body",
-									"value": "my note xyz",
-									"type": "text"
-								},
-								{
-									"key": "is_published",
-									"value": "1",
-									"type": "text"
-								}
-							]
-						},
 						"url": {
-							"raw": "{{url}}/auth/notes/my-note-xyz",
+							"raw": "{{url}}/auth/notes/my-note-xyz?title=my note xyz&body=my note xyz&is_published=1",
 							"host": [
 								"{{url}}"
 							],
@@ -186,6 +176,20 @@
 								"auth",
 								"notes",
 								"my-note-xyz"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "my note xyz"
+								},
+								{
+									"key": "body",
+									"value": "my note xyz"
+								},
+								{
+									"key": "is_published",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -195,7 +199,13 @@
 					"name": "DELETE-NOTE",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "{{url}}/auth/notes/my-note-xyz",
 							"host": [
