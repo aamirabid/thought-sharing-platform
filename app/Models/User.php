@@ -41,4 +41,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    //REQUESTED METHODS
+    public static function signUp($payload){
+        return 'Signup';
+    }
+    public static function signIn($payload){
+        return 'Signin';
+    }
+    public static function signOut($payload){
+        return 'Signout';
+    }
+    
 }
