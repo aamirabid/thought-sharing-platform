@@ -1,0 +1,60 @@
+<div class="container-fluid py-4">
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div
+            class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+          >
+            <h6 class="text-white text-capitalize ps-3">My Notes</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table table-bordered align-items-center mb-0">
+              <thead>
+                <tr class="align-middle text-center">
+                  <th>#Id</th>
+                  <th>Title</th>
+                  <th>Body</th>
+                  <th>Status</th>
+                  <th>
+                    <a
+                      class="btn btn-sm bg-gradient-primary m-2"
+                      routerLink="/auth/my-notes/add"
+                      type="button"
+                      >Add</a
+                    >
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="align-middle text-center" *ngFor="let note of this.notes?.data">
+                  <td>{{note.slug}}</td>
+                  <td>{{note.title}}</td>
+                  <td class="text-left">{{note.body}}</td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm bg-gradient-success" *ngIf="note.is_published"
+                      >Published</span
+                    >
+                    <span class="badge badge-sm bg-gradient-dark" *ngIf="!note.is_published"
+                      >Unpublished</span
+                    >
+                  </td>
+                  <td class="align-middle">
+                    <a
+                      class="btn btn-sm bg-gradient-info m-2"
+                      routerLink="/auth/my-notes/update/{{note.slug}}"
+                      >Edit</a
+                    >
+                    <a class="btn btn-sm bg-gradient-danger m-2" (click)="this.deleteNote(note.slug)"> Delete </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

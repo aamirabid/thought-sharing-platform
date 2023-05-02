@@ -1,0 +1,45 @@
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-lg-2 col-md-2 mt-3">
+      <a (click)="this.refresh()" class="btn btn-sm bg-gradient-primary">Refresh</a>
+    </div>
+    <div class="col-lg-10 col-md-10">
+      <mat-form-field class="tags">
+        <mat-label>Filter By</mat-label>
+        <mat-select [formControl]="filterTags" (infiniteScroll)="loadMore(true)" msInfiniteScroll>
+          <mat-option *ngFor="let tag of this.tags?.data" [value]="tag.tag">{{
+            tag.tag
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-lg-4 col-md-4 mb-2" *ngFor="let note of this.notes?.data">
+      <div class="card z-index-2">
+        <div class="card-body">
+          <h6 class="mb-0">{{ note.title }}</h6>
+          <p class="text-sm">
+            {{ note.body }}
+          </p>
+          <p class="mb-0 text-sm text-dark">
+            Author: {{ note.user.full_name }}
+          </p>
+          <hr class="dark horizontal" />
+          <div class="d-flex">
+            <i class="material-icons text-sm my-auto me-1">schedule</i>
+            <p class="mb-0 text-sm">{{ note.created_at }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2" *ngIf="this.notes?.next_page_url">
+    <div class="col-lg-12 col-md-12 mb-2">
+      <button class="btn btn-sm btn-primary" (click)="this.loadMore()">
+        LOAD MORE
+      </button>
+    </div>
+  </div>
+</div>
