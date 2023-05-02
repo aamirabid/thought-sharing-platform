@@ -111,14 +111,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/auth/notes/",
+							"raw": "{{url}}/auth/notes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MY-NOTE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/notes/aamir-testing",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"auth",
 								"notes",
-								""
+								"aamir-testing"
 							]
 						}
 					},
@@ -134,7 +152,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "my note xyz",
+									"value": "my note xyzabaaadsaaa",
 									"type": "text"
 								},
 								{
@@ -144,8 +162,13 @@
 								},
 								{
 									"key": "is_published",
-									"value": "1",
+									"value": "0",
 									"type": "text"
+								},
+								{
+									"key": "tags[0]",
+									"value": "thought",
+									"type": "default"
 								}
 							]
 						},
@@ -168,7 +191,7 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/auth/notes/my-note-xyz?title=my note xyz&body=my note xyz&is_published=1",
+							"raw": "{{url}}/auth/notes/my-note-xyz?title=my note xyz&body=my note xyz&is_published=1&tags[0]=thought&tags[1]=second&tags[2]=thought",
 							"host": [
 								"{{url}}"
 							],
@@ -189,6 +212,18 @@
 								{
 									"key": "is_published",
 									"value": "1"
+								},
+								{
+									"key": "tags[0]",
+									"value": "thought"
+								},
+								{
+									"key": "tags[1]",
+									"value": "second"
+								},
+								{
+									"key": "tags[2]",
+									"value": "thought"
 								}
 							]
 						}
@@ -207,14 +242,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/auth/notes/my-note-xyz",
+							"raw": "{{url}}/auth/notes/white",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"auth",
 								"notes",
-								"my-note-xyz"
+								"white"
 							]
 						}
 					},
@@ -231,7 +266,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/auth/dashboard/notes/?filterBy=thought",
+							"raw": "{{url}}/auth/dashboard/notes/?searchTxt=purple",
 							"host": [
 								"{{url}}"
 							],
@@ -244,7 +279,12 @@
 							"query": [
 								{
 									"key": "filterBy",
-									"value": "thought"
+									"value": "second",
+									"disabled": true
+								},
+								{
+									"key": "searchTxt",
+									"value": "purple"
 								}
 							]
 						}
@@ -274,7 +314,14 @@
 		}
 	],
 	"auth": {
-		"type": "bearer"
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "Bearer 2|m3h5DIdNmnHH4MVC6YJWYatvPwRIVpmiFcj0TN4Z",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{
