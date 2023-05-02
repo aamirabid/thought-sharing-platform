@@ -12,6 +12,7 @@ import { TagsMapper } from 'src/app/services/http/Interfaces/Dashboard/Tags';
 export class NotesComponent implements OnInit {
   filterTags = new FormControl('');
   declare filterBy: string;
+  declare searchTxt: string;
   declare notes: NotesMapper.Data;
   declare tags: TagsMapper.Data;
   constructor(private dashboardService: DashboardService) {}
@@ -26,12 +27,25 @@ export class NotesComponent implements OnInit {
 
   refresh():void{
     this.filterBy='';
+    this.searchTxt='';
     this.getNotes();
     this.getTags();
   }
 
+  search(event:any){
+    if(event.target.value){
+      this.searchTxt=event.target.value;
+      this.getNotes(1)
+    }else{
+      this.searchTxt='';
+      this.getNotes();
+    }
+  }
   getNotes(page: number = 1, loadMore: boolean = false): void {
     let payload: any = { page: page };
+    if (this.searchTxt) {
+      payload = { ...payload, searchTxt: this.searchTxt };
+    }
     if (this.filterBy) {
       payload = { ...payload, filterBy: this.filterBy };
     }

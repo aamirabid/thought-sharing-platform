@@ -3,7 +3,15 @@
     <div class="col-lg-2 col-md-2 mt-3">
       <a (click)="this.refresh()" class="btn btn-sm bg-gradient-primary">Refresh</a>
     </div>
-    <div class="col-lg-10 col-md-10">
+    
+    <div class="col-lg-5 col-md-2 mt-3"> 
+      <div class="form-group mb-0">
+      <div class="input-group"><span class="input-group-text"><i class="icon-search"></i></span>
+        <input (input)="this.search($event)" class="form-control form-control-plaintext" type="search" placeholder="Search..">
+      </div>
+    </div>
+    </div>
+    <div class="col-lg-5 col-md-10">
       <mat-form-field class="tags">
         <mat-label>Filter By</mat-label>
         <mat-select [formControl]="filterTags" (infiniteScroll)="loadMore(true)" msInfiniteScroll>
