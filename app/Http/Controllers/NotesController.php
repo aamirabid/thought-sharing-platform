@@ -12,14 +12,13 @@ class NotesController extends Controller
     /**
      * Display a listing of the notes.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $response=Notes::getNotes();
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::getNotes($request);
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
@@ -29,25 +28,23 @@ class NotesController extends Controller
     public function store(CreateAndUpdateNotesRequest $request)
     {
         try {
-            $response=Notes::createNote($request);
-            return response()->json(['message'=>'success','data'=>$response],201);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::createNote($request);
+            return response()->json(['message' => 'success', 'data' => $response], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
     /**
      * Display the specified note.
      */
-    public function show(string $id)
+    public function show(string $id,Request $request)
     {
         try {
-            $response=Notes::getNote($id);
-            return response()->json(['message'=>'success','data'=>$response],201);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::getNote($id,$request);
+            return response()->json(['message' => 'success', 'data' => $response], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
@@ -58,25 +55,23 @@ class NotesController extends Controller
     public function update(CreateAndUpdateNotesRequest $request, string $id)
     {
         try {
-            $response=Notes::updateNote($id,$request);
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::updateNote($id, $request);
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
     /**
      * Remove the specified note from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id,Request $request)
     {
         try {
-            $response=Notes::removeNote($id);
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::removeNote($id,$request);
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 }

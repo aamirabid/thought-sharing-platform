@@ -25,11 +25,12 @@ class SignupRequest extends FormRequest
     {
         return [
             'full_name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|string|max:255',
         ];
     }
-    public function failedValidation(Validator $validator){
+    public function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json([
             'message'   => 'Validation errors',
             'error'      => $validator->errors()

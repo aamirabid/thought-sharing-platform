@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notes;
@@ -14,11 +15,10 @@ class DashboardController extends Controller
     public function tags()
     {
         try {
-            $response=Tags::getTags();
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Tags::getTags();
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
     /**
@@ -27,12 +27,10 @@ class DashboardController extends Controller
     public function notes(Request $request)
     {
         try {
-            $response=Notes::getDashboardNotes($request);
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = Notes::getDashboardNotes($request);
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
-
 }

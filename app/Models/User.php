@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -18,7 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
     ];
@@ -42,17 +44,38 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-
     //REQUESTED METHODS
-    public static function signUp($payload){
-        return 'Signup';
+    public static function signUp($payload)
+    {
+        $user = User::create([
+            'full_name' => $payload->full_name,
+            'email' => $payload->email,
+            'password' => Hash::make($payload->password),
+        ]);
+        $token = $user->createToken('authToken')->plainTextToken;
+        return [
+            'accessToken' => 'Bearer ' . $token,
+            'user' => $user,
+        ];
     }
-    public static function signIn($payload){
-        return 'Signin';
+    public static function signIn($payload)
+    {
+        if (!Auth::attempt($payload->only(['email', 'password']))) {
+            return response()->json([
+                'message' => 'Email & Password does not match with our record.',
+                'data' => null,
+            ], 400);
+        }
+        $user = User::where('email', $payload->email)->firstOrFail();
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json(['message' => 'success', 'data' => [
+            'accessToken' => 'Bearer ' . $token,
+            'user' => $user,
+        ]], 200);
     }
-    public static function signOut($payload){
-        return 'Signout';
+    public static function signOut($payload)
+    {
+        return $payload->user()->currentAccessToken()->delete();
     }
-    
 }

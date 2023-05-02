@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('note_id');
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('note_id')->references('id')->on('notes');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('note_id')->references('id')->on('notes')->onDelete("cascade");
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete("cascade");
             $table->timestamps();
         });
     }

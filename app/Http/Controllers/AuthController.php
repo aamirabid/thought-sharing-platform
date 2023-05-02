@@ -16,11 +16,10 @@ class AuthController extends Controller
     public function signUp(SignupRequest $request)
     {
         try {
-            $response=User::signUp($request);
-            return response()->json(['message'=>'success','data'=>$response],201);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = User::signUp($request);
+            return response()->json(['message' => 'success', 'data' => $response], 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
@@ -31,11 +30,9 @@ class AuthController extends Controller
     public function signIn(SigninRequest $request)
     {
         try {
-            $response=User::signIn($request);
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            return User::signIn($request);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
 
@@ -45,13 +42,10 @@ class AuthController extends Controller
     public function signOut(Request $request)
     {
         try {
-            $response=User::signOut($request);
-            return response()->json(['message'=>'success','data'=>$response],200);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json(['message'=>'exception','data'=>$th],400);
+            $response = User::signOut($request);
+            return response()->json(['message' => 'success', 'data' => $response], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'exception', 'data' => $e->getMessage()], 400);
         }
     }
-
-    
 }

@@ -24,12 +24,14 @@ class CreateAndUpdateNotesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|unique:notes,title',
             'body' => 'required|string|max:255',
+            'tags' => 'required|array|min:1',
             'is_published' => 'required|boolean',
         ];
     }
-    public function failedValidation(Validator $validator){
+    public function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(response()->json([
             'message'   => 'Validation errors',
             'error'      => $validator->errors()

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('is_published')->default(0);
             $table->timestamps();
             $table->index(['title']);
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
         });
     }
 
