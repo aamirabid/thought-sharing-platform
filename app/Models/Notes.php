@@ -80,6 +80,13 @@ class Notes extends Model
                 return $results;
             });
         }
+        if ($payload->searchTxt) {   
+            $query->whereHas('tags',function($results) use ($payload){
+                $results->where('tag','like','%'.$payload->searchTxt.'%');
+                return $results;
+            });
+            $query->orWhere('title','like','%'.$payload->searchTxt.'%')->orWhere('body','like','%'.$payload->searchTxt.'%');
+        }
         return $query->orderBy('created_at', 'DESC')->simplePaginate(9);
     }
     public static function removeNote($id,$payload)
